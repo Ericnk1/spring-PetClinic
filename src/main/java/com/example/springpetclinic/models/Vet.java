@@ -26,4 +26,6 @@ public class Vet {
 
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Pet> petList;
+
+    private boolean isActive;
 }

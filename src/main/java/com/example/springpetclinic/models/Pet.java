@@ -34,4 +34,6 @@ public class Pet {
 
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Appointment> appointmentList;
+
+    private boolean isActive;
 }

@@ -19,4 +19,5 @@ public class Admin {
     private String telephoneNumber;
     private String email;
     private String password;
+    private boolean isActive;
 }

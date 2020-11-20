@@ -24,4 +24,6 @@ public class Consultant {
 
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Pet> petList;
+
+    private boolean isActive;
 }
