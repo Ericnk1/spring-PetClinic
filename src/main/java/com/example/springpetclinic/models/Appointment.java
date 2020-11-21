@@ -25,4 +25,6 @@ public class Appointment {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private Pet pet;
+
+    private boolean isActive;
 }

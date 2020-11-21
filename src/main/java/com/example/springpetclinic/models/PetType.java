@@ -19,4 +19,6 @@ public class PetType {
 
     @OneToMany(cascade = CascadeType.MERGE)
     private List<Pet> petList;
+
+    private boolean isActive;
 }

@@ -45,7 +45,7 @@ public interface ConsultantService {
      * @param email Consultant's email
      * @return Optional of Consultant
      */
-    Optional<Consultant> findAdminByEmail(String email);
+    Optional<Consultant> findConsultantByEmail(String email);
 
     /**
      * To get all consultants
