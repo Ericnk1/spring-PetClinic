@@ -13,8 +13,8 @@ import java.util.List;
 public class Consultant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer consultantId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long consultantId;
     private String firstName;
     private String lastName;
     private String password;

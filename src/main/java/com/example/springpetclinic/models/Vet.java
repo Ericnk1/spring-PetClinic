@@ -10,12 +10,12 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table
+//@Table
 public class Vet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer vetId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long vetId;
     private String firstName;
     private String lastName;
     private Date dateOfBirth;

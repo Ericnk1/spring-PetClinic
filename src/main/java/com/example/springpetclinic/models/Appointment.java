@@ -14,8 +14,8 @@ import java.util.Date;
 public class Appointment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer appointmentId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long appointmentId;
     private String description;
     private Date date; //date of consultation
     private LocalTime time;

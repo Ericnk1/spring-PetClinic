@@ -12,8 +12,8 @@ import javax.persistence.*;
 public class Admin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer adminId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long adminId;
     private String firstName;
     private String lastName;
     private String telephoneNumber;

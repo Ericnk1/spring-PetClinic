@@ -13,12 +13,12 @@ import java.util.List;
 public class PetType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int petTypeId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long petTypeId;
     private String name;
 
-    @OneToMany(cascade = CascadeType.MERGE)
-    private List<Pet> petList;
+    /*@OneToMany(cascade = CascadeType.MERGE)
+    private List<Pet> petList;*/
 
     private boolean isActive;
 }

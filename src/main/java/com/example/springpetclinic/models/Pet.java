@@ -14,8 +14,8 @@ import java.util.List;
 public class Pet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer petId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long petId;
     private String name;
     Date dateOfBirth;
     boolean isVaccinated;

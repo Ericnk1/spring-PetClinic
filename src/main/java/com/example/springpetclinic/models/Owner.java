@@ -14,8 +14,8 @@ import java.util.List;
 public class Owner {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ownerId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long ownerId;
     private String firstName;
     private String lastName;
     private Date dateOfBirth;
