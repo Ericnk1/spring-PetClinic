@@ -10,21 +10,17 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-//@Table
+@Table
 public class Vet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long vetId;
+    private Long id;
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
-    private String address;
-    private String telephoneNumber;
     private String email;
-    private String password;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "vet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> petList;
 
     private boolean isActive;

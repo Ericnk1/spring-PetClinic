@@ -15,24 +15,21 @@ public class Pet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long petId;
+    private Long id;
     private String name;
-    Date dateOfBirth;
+    private Date dateOfBirth;
     boolean isVaccinated;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     private PetType petType;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Owner owner;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Vet vet;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    private Consultant consultant;
-
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointmentList;
 
     private boolean isActive;

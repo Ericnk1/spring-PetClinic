@@ -14,14 +14,6 @@ public interface VetService {
      */
     void createVet(Vet vet);
 
-    /**
-     * To find user by username and password
-     *
-     * @param email Vet's email
-     * @param password Vet's password
-     * @return Optional of vet
-     */
-    Optional<Vet> findByEmailAndPassword(String email, String password);
 
     /**
      * To get list of active vets
@@ -31,7 +23,7 @@ public interface VetService {
     List<Vet> getActiveVets();
 
     /**
-     * To find user by username and password
+     * To find vet by first name and last name
      *
      * @param firstName Vet's first name
      * @param lastName Vet's last name
@@ -40,7 +32,7 @@ public interface VetService {
     Optional<Vet> findByFirstnameAndLastname(String firstName, String lastName);
 
     /**
-     * To find admin by email
+     * To find vet by email
      *
      * @param email Vet's email
      * @return Optional of Vet

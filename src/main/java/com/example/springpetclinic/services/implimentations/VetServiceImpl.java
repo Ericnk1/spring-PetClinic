@@ -23,11 +23,6 @@ public class VetServiceImpl implements VetService {
     }
 
     @Override
-    public Optional<Vet> findByEmailAndPassword(String email, String password) {
-        return vetRepository.findByEmailAndPassword(email, password);
-    }
-
-    @Override
     public List<Vet> getActiveVets() {
         return getAllVets().stream()
                 .filter(Vet::isActive)

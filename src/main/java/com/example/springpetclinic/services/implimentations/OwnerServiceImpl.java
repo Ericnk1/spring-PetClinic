@@ -23,11 +23,6 @@ public class OwnerServiceImpl implements OwnerService {
     }
 
     @Override
-    public Optional<Owner> findByEmailAndPassword(String email, String password) {
-        return ownerRepository.findByEmailAndPassword(email, password);
-    }
-
-    @Override
     public List<Owner> getActiveOwners() {
         return getAllOwners().stream()
                 .filter(Owner::isActive)

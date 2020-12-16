@@ -1,5 +1,6 @@
 package com.example.springpetclinic.services;
 
+import com.example.springpetclinic.models.Owner;
 import com.example.springpetclinic.models.Pet;
 
 import java.util.List;
@@ -35,6 +36,8 @@ public interface PetService {
      * @return optional of pet
      */
     Optional<Pet> findPetById(Long id);
+
+    // Optional<Pet> findPetOwner(Long id);
 
     /**
      * To update an existing pet

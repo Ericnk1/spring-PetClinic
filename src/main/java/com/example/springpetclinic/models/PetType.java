@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
@@ -14,11 +13,7 @@ public class PetType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long petTypeId;
+    private Long id;
     private String name;
-
-    /*@OneToMany(cascade = CascadeType.MERGE)
-    private List<Pet> petList;*/
-
     private boolean isActive;
 }

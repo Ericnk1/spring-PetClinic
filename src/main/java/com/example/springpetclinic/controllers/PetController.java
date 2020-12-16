@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/pet")
@@ -56,4 +57,9 @@ public class PetController {
         petService.restorePetById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    /*@GetMapping
+    public Optional<Pet> findPetOwner(@PathVariable Long id) {
+        return petService.findPetOwner(id);
+    }*/
 }

@@ -15,16 +15,12 @@ public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long appointmentId;
+    private Long id;
     private String description;
     private Date date; //date of consultation
     private LocalTime time;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    private Consultant consultant;
-
-    @ManyToOne(cascade = CascadeType.MERGE)
     private Pet pet;
-
     private boolean isActive;
 }

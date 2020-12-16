@@ -15,15 +15,6 @@ public interface OwnerService {
     void createOwner(Owner owner);
 
     /**
-     * To find user by username and password
-     *
-     * @param email Owner's email
-     * @param password Owner's password
-     * @return Optional of owner
-     */
-    Optional<Owner> findByEmailAndPassword(String email, String password);
-
-    /**
      * To get list of active owners
      *
      * @return list of owners

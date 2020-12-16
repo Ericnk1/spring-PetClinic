@@ -15,16 +15,14 @@ public class Owner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long ownerId;
+    private Long id;
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
     private String address;
     private String telephoneNumber;
     private String email;
-    private String password;
 
-    @OneToMany(cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> petList;
 
     private boolean isActive;
