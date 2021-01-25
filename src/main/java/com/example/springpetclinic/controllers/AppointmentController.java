@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -19,7 +20,7 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    @PostMapping
+    @PostMapping//(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createAppointment(@RequestBody Appointment appointment) {
         appointmentService.createAppointment(appointment);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -30,6 +31,9 @@ public class AppointmentController {
         return appointmentService.getAllAppointments();
     }
 
+    @RequestMapping("/active")
+    public List<Appointment> getActiveUsers(Model model) {return appointmentService.getActiveAppointments();}
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateAppointment(@RequestBody Appointment appointment) {
         appointmentService.updateAppointment(appointment);
@@ -39,7 +43,7 @@ public class AppointmentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAppointment(@PathVariable Long id) {
         appointmentService.deleteAppointmentById(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -54,6 +58,12 @@ public class AppointmentController {
     @GetMapping("/restore/{id}")
     public ResponseEntity<String> restoreAppointment(@PathVariable Long id) {
         appointmentService.restoreAppointmentById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{petId}")
+    public ResponseEntity<String> findAppointmentByPetId(@PathVariable Long petId) {
+        appointmentService.findAppointmentByPetId(petId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

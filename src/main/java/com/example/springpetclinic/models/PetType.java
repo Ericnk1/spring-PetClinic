@@ -1,12 +1,12 @@
 package com.example.springpetclinic.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
 @Data
+@Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Table
 public class PetType {

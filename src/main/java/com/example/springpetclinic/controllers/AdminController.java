@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -30,6 +31,9 @@ public class AdminController {
         return adminService.getAllAdmins();
     }
 
+    @RequestMapping("/active")
+    public List<Admin> getActiveUsers(Model model) {return adminService.getActiveAdmins();}
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateAdmin(@RequestBody Admin admin) {
         adminService.updateAdmin(admin);
@@ -39,7 +43,7 @@ public class AdminController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAdmin(@PathVariable Long id) {
         adminService.deleteAdminById(id);
         return new ResponseEntity<>(HttpStatus.OK);

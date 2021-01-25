@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -30,6 +31,9 @@ public class PetTypeController {
         return petTypeService.getAllPetTypes();
     }
 
+    @RequestMapping("/active")
+    public List<PetType> getActivePetTypes(Model model) {return petTypeService.getActivePetTypes();}
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updatePetType(@RequestBody PetType petType) {
         petTypeService.updatePetType(petType);
@@ -39,7 +43,7 @@ public class PetTypeController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePetType(@PathVariable Long id) {
         petTypeService.deletePetTypeById(id);
         return new ResponseEntity<>(HttpStatus.OK);

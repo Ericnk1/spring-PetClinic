@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -20,7 +21,7 @@ public class PetController {
     @Autowired
     private PetService petService;
 
-    @PostMapping
+    @PostMapping//(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createPet(@RequestBody Pet pet) {
         petService.createPet(pet);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -31,6 +32,9 @@ public class PetController {
         return petService.getAllPets();
     }
 
+    @RequestMapping("/active")
+    public List<Pet> getActiveUsers(Model model) {return petService.getActivePets();}
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updatePet(@RequestBody Pet pet) {
         petService.updatePet(pet);
@@ -40,7 +44,7 @@ public class PetController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePet(@PathVariable Long id) {
         petService.deletePetById(id);
         return new ResponseEntity<>(HttpStatus.OK);
@@ -55,6 +59,12 @@ public class PetController {
     @GetMapping("/restore/{id}")
     public ResponseEntity<String> restorePet(@PathVariable Long id) {
         petService.restorePetById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> findPetById(@PathVariable Long id) {
+        petService.findPetById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

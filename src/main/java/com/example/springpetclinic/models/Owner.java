@@ -1,14 +1,15 @@
 package com.example.springpetclinic.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Table
 public class Owner {
@@ -22,6 +23,7 @@ public class Owner {
     private String telephoneNumber;
     private String email;
 
+    //@JsonIgnore
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pet> petList;
 

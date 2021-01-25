@@ -1,14 +1,16 @@
 package com.example.springpetclinic.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.Date;
 
-@Entity
 @Data
+@Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Table
 public class Appointment {
@@ -17,10 +19,13 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String description;
-    private Date date; //date of consultation
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date date = new Date(); //date of consultation
     private LocalTime time;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @JsonIgnore
+    @ManyToOne//(cascade = CascadeType.ALL)
     private Pet pet;
     private boolean isActive;
 }

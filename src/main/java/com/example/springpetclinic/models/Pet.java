@@ -1,14 +1,16 @@
 package com.example.springpetclinic.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Table
 public class Pet {
@@ -17,18 +19,20 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
+    //@JsonIgnore
     private Date dateOfBirth;
     boolean isVaccinated;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne//(cascade = CascadeType.ALL)
     private PetType petType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Owner owner;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Vet vet;
-
+    //@JsonIgnore
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointmentList;
 

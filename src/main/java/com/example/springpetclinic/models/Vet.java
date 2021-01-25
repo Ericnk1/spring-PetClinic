@@ -1,14 +1,14 @@
 package com.example.springpetclinic.models;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Table
 public class Vet {
@@ -19,9 +19,5 @@ public class Vet {
     private String firstName;
     private String lastName;
     private String email;
-
-    @OneToMany(mappedBy = "vet", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Pet> petList;
-
     private boolean isActive;
 }

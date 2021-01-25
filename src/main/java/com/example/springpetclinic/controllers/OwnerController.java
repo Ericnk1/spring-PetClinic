@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -30,6 +31,9 @@ public class OwnerController {
         return ownerService.getAllOwners();
     }
 
+    @RequestMapping("/active")
+    public List<Owner> getActiveUsers(Model model) {return ownerService.getActiveOwners();}
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateOwner(@RequestBody Owner owner) {
         ownerService.updateOwner(owner);
@@ -39,7 +43,7 @@ public class OwnerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOwner(@PathVariable Long id) {
         ownerService.deleteOwnerById(id);
         return new ResponseEntity<>(HttpStatus.OK);

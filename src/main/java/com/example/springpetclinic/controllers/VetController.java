@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -31,6 +32,9 @@ public class VetController {
         return vetService.getAllVets();
     }
 
+    @RequestMapping("/active")
+    public List<Vet> getActiveUsers(Model model) {return vetService.getActiveVets();}
+
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateVet(@RequestBody Vet vet) {
         vetService.updateVet(vet);
@@ -40,7 +44,7 @@ public class VetController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteVet(@PathVariable Long id) {
         vetService.deleteVetById(id);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -6,6 +6,7 @@ import com.example.springpetclinic.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -63,5 +64,10 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setActive(true);
             updateAppointment(appointment);
         });
+    }
+
+    @Override
+    public List<Appointment> findAppointmentByPetId(Long petId) {
+        return appointmentRepository.findByPetId(petId);
     }
 }
