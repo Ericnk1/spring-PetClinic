@@ -34,7 +34,7 @@ public class AppointmentController {
     @RequestMapping("/active")
     public List<Appointment> getActiveUsers(Model model) {return appointmentService.getActiveAppointments();}
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateAppointment(@RequestBody Appointment appointment) {
         appointmentService.updateAppointment(appointment);
         HttpHeaders headers = new HttpHeaders();
@@ -61,9 +61,15 @@ public class AppointmentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/{petId}")
+    @GetMapping("/list/{petId}")
     public ResponseEntity<String> findAppointmentByPetId(@PathVariable Long petId) {
         appointmentService.findAppointmentByPetId(petId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping("/res/{id}")
+    public ResponseEntity<String> findAppointmentById(@PathVariable Long id) {
+        appointmentService.findAppointmentById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

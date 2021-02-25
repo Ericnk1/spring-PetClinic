@@ -34,7 +34,7 @@ public class OwnerController {
     @RequestMapping("/active")
     public List<Owner> getActiveUsers(Model model) {return ownerService.getActiveOwners();}
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateOwner(@RequestBody Owner owner) {
         ownerService.updateOwner(owner);
         HttpHeaders headers = new HttpHeaders();
@@ -58,6 +58,12 @@ public class OwnerController {
     @GetMapping("/restore/{id}")
     public ResponseEntity<String> restoreOwner(@PathVariable Long id) {
         ownerService.restoreOwnerById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping("/res/{id}")
+    public ResponseEntity<String> findOwnerById(@PathVariable Long id) {
+        ownerService.findOwnerById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

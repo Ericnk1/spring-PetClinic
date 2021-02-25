@@ -36,7 +36,7 @@ public class PetTypeServiceImpl implements PetTypeService {
 
     @Override
     public Optional<PetType> findPetTypeById(Long id) {
-        return petTypeRepository.findById(id);
+        return petTypeRepository.findPetTypesById(id);
     }
 
     @Override

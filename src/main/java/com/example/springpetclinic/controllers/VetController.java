@@ -35,7 +35,7 @@ public class VetController {
     @RequestMapping("/active")
     public List<Vet> getActiveUsers(Model model) {return vetService.getActiveVets();}
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateVet(@RequestBody Vet vet) {
         vetService.updateVet(vet);
         HttpHeaders headers = new HttpHeaders();
@@ -59,6 +59,12 @@ public class VetController {
     @GetMapping("/restore/{id}")
     public ResponseEntity<String> restoreVet(@PathVariable Long id) {
         vetService.restoreVetById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping("/res/{id}")
+    public ResponseEntity<String> findVetById(@PathVariable Long id) {
+        vetService.findVetById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

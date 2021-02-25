@@ -34,7 +34,7 @@ public class AdminController {
     @RequestMapping("/active")
     public List<Admin> getActiveUsers(Model model) {return adminService.getActiveAdmins();}
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateAdmin(@RequestBody Admin admin) {
         adminService.updateAdmin(admin);
         HttpHeaders headers = new HttpHeaders();

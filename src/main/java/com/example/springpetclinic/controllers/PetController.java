@@ -33,9 +33,9 @@ public class PetController {
     }
 
     @RequestMapping("/active")
-    public List<Pet> getActiveUsers(Model model) {return petService.getActivePets();}
+    public List<Pet> getActivePets(Model model) {return petService.getActivePets();}
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updatePet(@RequestBody Pet pet) {
         petService.updatePet(pet);
         HttpHeaders headers = new HttpHeaders();
@@ -62,7 +62,7 @@ public class PetController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @RequestMapping("/res/{id}")
     public ResponseEntity<String> findPetById(@PathVariable Long id) {
         petService.findPetById(id);
         return new ResponseEntity<>(HttpStatus.OK);

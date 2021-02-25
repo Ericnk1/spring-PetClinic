@@ -29,11 +29,11 @@ public class Pet {
     private PetType petType;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne //(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Owner owner;
 
     //@JsonIgnore
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.MERGE)
     private List<Appointment> appointmentList;
 
     private boolean isActive;
