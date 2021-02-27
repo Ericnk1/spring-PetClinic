@@ -63,7 +63,7 @@ public class PetController {
     }
 
     @RequestMapping("/res/{id}")
-    public ResponseEntity<String> findPetById(@PathVariable Long id) {
+    public ResponseEntity<String> findPetById(@PathVariable("id") Long id) {
         petService.findPetById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

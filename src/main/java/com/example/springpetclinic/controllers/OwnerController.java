@@ -62,7 +62,7 @@ public class OwnerController {
     }
 
     @RequestMapping("/res/{id}")
-    public ResponseEntity<String> findOwnerById(@PathVariable Long id) {
+    public ResponseEntity<String> findOwnerById(@PathVariable("id") Long id) {
         ownerService.findOwnerById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

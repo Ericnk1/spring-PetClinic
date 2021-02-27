@@ -63,7 +63,7 @@ public class VetController {
     }
 
     @RequestMapping("/res/{id}")
-    public ResponseEntity<String> findVetById(@PathVariable Long id) {
+    public ResponseEntity<String> findVetById(@PathVariable("id") Long id) {
         vetService.findVetById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

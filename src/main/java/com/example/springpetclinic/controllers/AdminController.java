@@ -56,7 +56,7 @@ public class AdminController {
     }
 
     @GetMapping("/restore/{id}")
-    public ResponseEntity<String> restoreAdmin(@PathVariable Long id) {
+    public ResponseEntity<String> restoreAdmin(@PathVariable("id") Long id) {
         adminService.restoreAdminById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

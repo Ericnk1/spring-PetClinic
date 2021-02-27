@@ -68,7 +68,7 @@ public class AppointmentController {
     }
 
     @RequestMapping("/res/{id}")
-    public ResponseEntity<String> findAppointmentById(@PathVariable Long id) {
+    public ResponseEntity<String> findAppointmentById(@PathVariable("id") Long id) {
         appointmentService.findAppointmentById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
