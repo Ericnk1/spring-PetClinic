@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/pet")
 public class PetController {
@@ -24,8 +25,6 @@ public class PetController {
 
     @PostMapping//(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createPet(@RequestBody Pet pet) {
-        Owner owner = new Owner();
-        pet.setOwner(owner);
         petService.createPet(pet);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

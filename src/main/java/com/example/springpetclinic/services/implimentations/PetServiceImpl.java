@@ -19,6 +19,8 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public void createPet(Pet pet) {
+        Owner owner = new Owner();
+        pet.setOwner(owner);
         pet.setActive(true);
         petRepository.save(pet);
     }

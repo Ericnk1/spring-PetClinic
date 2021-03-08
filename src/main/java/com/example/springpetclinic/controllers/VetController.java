@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/vet")
 public class VetController {
