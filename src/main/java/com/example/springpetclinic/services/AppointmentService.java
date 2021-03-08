@@ -66,4 +66,5 @@ public interface AppointmentService {
     void restoreAppointmentById(Long id);
 
     List<Appointment> findAppointmentByPetId(Long petId);
+
 }

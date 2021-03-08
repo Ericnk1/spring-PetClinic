@@ -70,4 +70,5 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<Appointment> findAppointmentByPetId(Long petId) {
         return appointmentRepository.findByPetId(petId);
     }
+
 }

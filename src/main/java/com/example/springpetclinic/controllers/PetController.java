@@ -1,5 +1,6 @@
 package com.example.springpetclinic.controllers;
 
+import com.example.springpetclinic.models.Owner;
 import com.example.springpetclinic.models.Pet;
 import com.example.springpetclinic.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,8 @@ public class PetController {
 
     @PostMapping//(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createPet(@RequestBody Pet pet) {
+        Owner owner = new Owner();
+        pet.setOwner(owner);
         petService.createPet(pet);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
