@@ -19,8 +19,6 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public void createPet(Pet pet) {
-        Owner owner = new Owner();
-        pet.setOwner(owner);
         pet.setActive(true);
         petRepository.save(pet);
     }
@@ -36,6 +34,13 @@ public class PetServiceImpl implements PetService {
                 .filter(Pet::isActive)
                 .collect(Collectors.toList());
     }
+
+    /*@Override
+    public List<Pet> getNonActivePets() {
+        return getAllPets().stream()
+                .filter(Pet::isActive)
+                .collect(Collectors.toList());
+    }*/
 
     @Override
     public Optional<Pet> findPetById(Long id) {

@@ -1,5 +1,6 @@
 package com.example.springpetclinic.controllers;
 
+import com.example.springpetclinic.exceptions.NotFoundException;
 import com.example.springpetclinic.models.Owner;
 import com.example.springpetclinic.models.Pet;
 import com.example.springpetclinic.services.PetService;
@@ -15,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/pet")
 public class PetController {
@@ -33,6 +34,9 @@ public class PetController {
     public List<Pet> getAllPets() {
         return petService.getAllPets();
     }
+
+    /*@RequestMapping("/inactive")
+    public List<Pet> getInactivePets(Model model) {return petService.getNonActivePets();}*/
 
     @RequestMapping("/active")
     public List<Pet> getActivePets(Model model) {return petService.getActivePets();}
@@ -65,8 +69,8 @@ public class PetController {
     }
 
     @GetMapping("/res/{id}")
-    public ResponseEntity<String> findPetById(@PathVariable("id") Long id) {
-        petService.findPetById(id);
+    public ResponseEntity<Pet> findPetById(@PathVariable(value = "id") Long id) throws NotFoundException {
+        petService.findPetById(id).orElseThrow(() -> new NotFoundException("Pet could not be found for :: " + id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

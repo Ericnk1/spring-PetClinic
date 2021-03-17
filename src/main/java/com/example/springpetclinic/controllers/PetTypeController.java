@@ -1,6 +1,8 @@
 package com.example.springpetclinic.controllers;
 
+import com.example.springpetclinic.exceptions.NotFoundException;
 import com.example.springpetclinic.models.PetType;
+import com.example.springpetclinic.repositories.PetTypeRepository;
 import com.example.springpetclinic.services.PetTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -13,13 +15,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/petType")
 public class PetTypeController {
 
     @Autowired
     private PetTypeService petTypeService;
+    @Autowired
+    PetTypeRepository petTypeRepository;
 
     @PostMapping
     public ResponseEntity<String> createPetType(@RequestBody PetType petType) {
@@ -63,8 +67,8 @@ public class PetTypeController {
     }
 
     @GetMapping("/res/{id}")
-    public ResponseEntity<String> findPetTypeById(@PathVariable("id") Long id) {
-        petTypeService.findPetTypeById(id);
+    public ResponseEntity<String> findPetTypeById(@PathVariable("id") Long id) throws NotFoundException {
+        petTypeService.findPetTypeById(id).orElseThrow(() -> new NotFoundException("PetType could not be found for :: " + id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -12,4 +12,6 @@ public interface VetRepository extends JpaRepository<Vet, Long> {
     Optional<Vet> findByFirstNameAndLastName(String firstName, String lastName);
 
     Optional<Vet> findVetByEmail(String email);
+
+    Vet findVetById(Long id);
 }

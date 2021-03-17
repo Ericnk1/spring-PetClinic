@@ -1,6 +1,7 @@
 package com.example.springpetclinic.controllers;
 
 
+import com.example.springpetclinic.exceptions.NotFoundException;
 import com.example.springpetclinic.models.Vet;
 import com.example.springpetclinic.services.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/vet")
 public class VetController {
@@ -64,8 +65,8 @@ public class VetController {
     }
 
     @GetMapping("/res/{id}")
-    public ResponseEntity<String> findVetById(@PathVariable("id") Long id) {
-        vetService.findVetById(id);
+    public ResponseEntity<String> findVetById(@PathVariable("id") Long id) throws NotFoundException {
+        vetService.findVetById(id).orElseThrow(() -> new NotFoundException("Vet could not be found for :: " + id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

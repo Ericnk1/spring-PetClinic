@@ -25,7 +25,21 @@ public class Appointment {
     private LocalTime time;
 
     @JsonIgnore
-    @ManyToOne//(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "pet_id")
     private Pet pet;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Appointment )) return false;
+        return id != null && id.equals(((Appointment) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+
     private boolean isActive;
 }

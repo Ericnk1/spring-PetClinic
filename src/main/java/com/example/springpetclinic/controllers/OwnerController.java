@@ -1,5 +1,6 @@
 package com.example.springpetclinic.controllers;
 
+import com.example.springpetclinic.exceptions.NotFoundException;
 import com.example.springpetclinic.models.Owner;
 import com.example.springpetclinic.services.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/owner")
 public class OwnerController {
@@ -63,8 +64,8 @@ public class OwnerController {
     }
 
     @RequestMapping("/res/{id}")
-    public ResponseEntity<String> findOwnerById(@PathVariable("id") Long id) {
-        ownerService.findOwnerById(id);
+    public ResponseEntity<String> findOwnerById(@PathVariable("id") Long id) throws NotFoundException {
+        ownerService.findOwnerById(id).orElseThrow(() -> new NotFoundException("Owner could not be found for :: " + id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

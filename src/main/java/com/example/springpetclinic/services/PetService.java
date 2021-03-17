@@ -29,6 +29,8 @@ public interface PetService {
      */
     List<Pet> getActivePets();
 
+    //List<Pet> getNonActivePets();
+
     /**
      * To find pet by id
      *

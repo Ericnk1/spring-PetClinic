@@ -1,7 +1,9 @@
 package com.example.springpetclinic.controllers;
 
+import com.example.springpetclinic.exceptions.NotFoundException;
 import com.example.springpetclinic.models.Appointment;
 import com.example.springpetclinic.models.Pet;
+import com.example.springpetclinic.repositories.AppointmentRepository;
 import com.example.springpetclinic.repositories.PetRepository;
 import com.example.springpetclinic.repositories.PetTypeRepository;
 import com.example.springpetclinic.services.AppointmentService;
@@ -18,7 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+// @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/appointment")
 public class AppointmentController {
@@ -26,12 +28,12 @@ public class AppointmentController {
     @Autowired
     private AppointmentService appointmentService;
 
-    private PetRepository petRepository;
+    @Autowired
+    private AppointmentRepository appointmentRepository;
+
 
     @PostMapping//(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> createAppointment( Long petId, @RequestBody Appointment appointment) {
-        Pet pet = this.petRepository.findPet(petId);
-        appointment.setPet(pet);
+    public ResponseEntity<String> createAppointment(@RequestBody Appointment appointment) {
         appointmentService.createAppointment(appointment);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -77,9 +79,9 @@ public class AppointmentController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping("/res/{id}")
-    public ResponseEntity<String> findAppointmentById(@PathVariable("id") Long id) {
-        appointmentService.findAppointmentById(id);
+    @GetMapping("/res/{id}")
+    public ResponseEntity<String> findAppointmentById(@PathVariable("id") Long id) throws NotFoundException {
+        appointmentService.findAppointmentById(id).orElseThrow(() -> new NotFoundException("Appointment could not be found for :: " + id));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
