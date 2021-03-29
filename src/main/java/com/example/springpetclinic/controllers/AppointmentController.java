@@ -33,7 +33,8 @@ public class AppointmentController {
 
 
     @PostMapping//(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> createAppointment(@RequestBody Appointment appointment) {
+    public ResponseEntity<String> createAppointment(@RequestBody Appointment appointment, Pet pet) {
+        pet.addAppointment(appointment);
         appointmentService.createAppointment(appointment);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

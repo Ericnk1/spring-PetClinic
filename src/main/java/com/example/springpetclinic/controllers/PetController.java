@@ -25,7 +25,8 @@ public class PetController {
     private PetService petService;
 
     @PostMapping//(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> createPet(@RequestBody Pet pet) {
+    public ResponseEntity<String> createPet(@RequestBody Pet pet, Owner owner) {
+        owner.addPet(pet);
         petService.createPet(pet);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
