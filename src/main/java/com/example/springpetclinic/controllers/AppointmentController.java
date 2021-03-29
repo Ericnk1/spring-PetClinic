@@ -80,8 +80,7 @@ public class AppointmentController {
     }
 
     @GetMapping("/res/{id}")
-    public ResponseEntity<String> findAppointmentById(@PathVariable("id") Long id) throws NotFoundException {
-        appointmentService.findAppointmentById(id).orElseThrow(() -> new NotFoundException("Appointment could not be found for :: " + id));
-        return new ResponseEntity<>(HttpStatus.OK);
+    public Optional<Appointment> findAppointmentById(@PathVariable("id") Long id){
+        return appointmentService.findAppointmentById(id);
     }
 }

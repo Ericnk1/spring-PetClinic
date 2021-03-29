@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface PetTypeRepository extends JpaRepository<PetType, Long> {
-    //Optional <PetType> findPetTypesById (Long id);
-    PetType findPetTypesById(Long id);
+    Optional <PetType> findPetTypesById (Long id);
+    //PetType findPetTypesById(Long id);
 }

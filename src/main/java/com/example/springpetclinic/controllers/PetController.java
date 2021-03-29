@@ -69,9 +69,8 @@ public class PetController {
     }
 
     @GetMapping("/res/{id}")
-    public ResponseEntity<Pet> findPetById(@PathVariable(value = "id") Long id) throws NotFoundException {
-        petService.findPetById(id).orElseThrow(() -> new NotFoundException("Pet could not be found for :: " + id));
-        return new ResponseEntity<>(HttpStatus.OK);
+    public Optional<Pet> findPetById(@PathVariable(value = "id") Long id){
+        return petService.findPetById(id);
     }
 
     /*@GetMapping

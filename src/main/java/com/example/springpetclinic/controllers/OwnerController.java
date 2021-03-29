@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 // @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -64,8 +65,7 @@ public class OwnerController {
     }
 
     @RequestMapping("/res/{id}")
-    public ResponseEntity<String> findOwnerById(@PathVariable("id") Long id) throws NotFoundException {
-        ownerService.findOwnerById(id).orElseThrow(() -> new NotFoundException("Owner could not be found for :: " + id));
-        return new ResponseEntity<>(HttpStatus.OK);
+    public Optional<Owner> findOwnerById(@PathVariable("id") Long id){
+        return ownerService.findOwnerById(id);
     }
 }

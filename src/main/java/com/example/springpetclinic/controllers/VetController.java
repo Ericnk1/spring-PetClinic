@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 // @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -65,8 +66,7 @@ public class VetController {
     }
 
     @GetMapping("/res/{id}")
-    public ResponseEntity<String> findVetById(@PathVariable("id") Long id) throws NotFoundException {
-        vetService.findVetById(id).orElseThrow(() -> new NotFoundException("Vet could not be found for :: " + id));
-        return new ResponseEntity<>(HttpStatus.OK);
+    public Optional<Vet> findVetById(@PathVariable("id") Long id){
+        return vetService.findVetById(id);
     }
 }

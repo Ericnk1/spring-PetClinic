@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 // @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
@@ -67,8 +68,7 @@ public class PetTypeController {
     }
 
     @GetMapping("/res/{id}")
-    public ResponseEntity<String> findPetTypeById(@PathVariable("id") Long id) throws NotFoundException {
-        petTypeService.findPetTypeById(id).orElseThrow(() -> new NotFoundException("PetType could not be found for :: " + id));
-        return new ResponseEntity<>(HttpStatus.OK);
+    public Optional<PetType> findPetTypeById(@PathVariable("id") Long id) {
+        return petTypeService.findPetTypeById(id);
     }
 }
