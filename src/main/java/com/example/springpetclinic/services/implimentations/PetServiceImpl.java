@@ -1,6 +1,5 @@
 package com.example.springpetclinic.services.implimentations;
 
-import com.example.springpetclinic.models.Owner;
 import com.example.springpetclinic.models.Pet;
 import com.example.springpetclinic.repositories.PetRepository;
 import com.example.springpetclinic.services.PetService;
@@ -16,6 +15,7 @@ public class PetServiceImpl implements PetService {
 
     @Autowired
     private PetRepository petRepository;
+
 
     @Override
     public void createPet(Pet pet) {
@@ -35,22 +35,10 @@ public class PetServiceImpl implements PetService {
                 .collect(Collectors.toList());
     }
 
-    /*@Override
-    public List<Pet> getNonActivePets() {
-        return getAllPets().stream()
-                .filter(Pet::isActive)
-                .collect(Collectors.toList());
-    }*/
-
     @Override
     public Optional<Pet> findPetById(Long id) {
         return petRepository.findById(id);
     }
-
-    /*@Override
-    public Optional<Pet> findPetOwner(Long id) {
-        return petRepository.findPetOwner(id);
-    }*/
 
     @Override
     public void updatePet(Pet pet) {

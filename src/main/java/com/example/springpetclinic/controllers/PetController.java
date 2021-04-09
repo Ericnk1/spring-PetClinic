@@ -3,6 +3,7 @@ package com.example.springpetclinic.controllers;
 import com.example.springpetclinic.exceptions.NotFoundException;
 import com.example.springpetclinic.models.Owner;
 import com.example.springpetclinic.models.Pet;
+import com.example.springpetclinic.repositories.OwnerRepository;
 import com.example.springpetclinic.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-// @CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/pet")
 public class PetController {
@@ -24,9 +25,11 @@ public class PetController {
     @Autowired
     private PetService petService;
 
+    @Autowired
+    private OwnerRepository ownerRepository;
+
     @PostMapping//(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> createPet(@RequestBody Pet pet, Owner owner) {
-        owner.addPet(pet);
+    public ResponseEntity<String> createPet(@RequestBody Pet pet) {
         petService.createPet(pet);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

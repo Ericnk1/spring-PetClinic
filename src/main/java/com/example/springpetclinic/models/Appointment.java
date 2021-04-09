@@ -8,8 +8,11 @@ import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.Date;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Data
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table
@@ -25,11 +28,11 @@ public class Appointment {
     private LocalTime time;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "pet_id")
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "pet_id")
     private Pet pet;
 
-    @Override
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Appointment )) return false;
@@ -39,7 +42,7 @@ public class Appointment {
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
+    }*/
 
     private boolean isActive;
 }

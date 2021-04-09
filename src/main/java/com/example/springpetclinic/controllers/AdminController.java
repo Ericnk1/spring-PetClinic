@@ -1,6 +1,7 @@
 package com.example.springpetclinic.controllers;
 
 import com.example.springpetclinic.models.Admin;
+import com.example.springpetclinic.models.Owner;
 import com.example.springpetclinic.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -59,5 +62,10 @@ public class AdminController {
     public ResponseEntity<String> restoreAdmin(@PathVariable("id") Long id) {
         adminService.restoreAdminById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping("/res/{id}")
+    public Optional<Admin> findOwnerById(@PathVariable("id") Long id){
+        return adminService.findAdminById(id);
     }
 }

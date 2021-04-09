@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-// @CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/vet")
 public class VetController {
@@ -48,7 +48,7 @@ public class VetController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteVet(@PathVariable Long id) {
+    public ResponseEntity<String>deleteVet(@PathVariable Long id) {
         vetService.deleteVetById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,13 +1,8 @@
 package com.example.springpetclinic.controllers;
 
-import com.example.springpetclinic.exceptions.NotFoundException;
 import com.example.springpetclinic.models.Appointment;
-import com.example.springpetclinic.models.Pet;
 import com.example.springpetclinic.repositories.AppointmentRepository;
-import com.example.springpetclinic.repositories.PetRepository;
-import com.example.springpetclinic.repositories.PetTypeRepository;
 import com.example.springpetclinic.services.AppointmentService;
-import com.example.springpetclinic.services.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,8 +28,7 @@ public class AppointmentController {
 
 
     @PostMapping//(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> createAppointment(@RequestBody Appointment appointment, Pet pet) {
-        pet.addAppointment(appointment);
+    public ResponseEntity<String> createAppointment(@RequestBody Appointment appointment) {
         appointmentService.createAppointment(appointment);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

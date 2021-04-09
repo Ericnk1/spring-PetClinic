@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static javax.persistence.FetchType.LAZY;
+
 @Data
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table
@@ -23,19 +26,20 @@ public class Pet {
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth = new Date();
-    boolean isVaccinated;
+    String isVaccinated;
+
+    private String petType;
 
     @JsonIgnore
-    @ManyToOne//(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pet_type_id")
-    private PetType petType;
-
-    @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "owner_id")
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "owner_id")
     private Owner owner;
 
-    @Override
+    @JsonIgnore
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, fetch = LAZY)
+    private List<Appointment> appointment;
+
+    /*@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Pet )) return false;
@@ -45,13 +49,13 @@ public class Pet {
     @Override
     public int hashCode() {
         return getClass().hashCode();
-    }
+    }*/
 
     //@JsonIgnore
-    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Appointment> appointmentList = new ArrayList<>();
+    /*@OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Appointment> appointmentList = new ArrayList<>();*/
 
-    public void addAppointment(Appointment appointment) {
+    /*public void addAppointment(Appointment appointment) {
         appointmentList.add(appointment);
         appointment.setPet(this);
     }
@@ -59,7 +63,7 @@ public class Pet {
     public void removeAppointment(Appointment appointment) {
         appointmentList.remove(appointment);
         appointment.setPet(null);
-    }
+    }*/
 
     private boolean isActive;
 }

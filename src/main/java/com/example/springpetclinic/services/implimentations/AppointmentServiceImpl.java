@@ -1,6 +1,7 @@
 package com.example.springpetclinic.services.implimentations;
 
 import com.example.springpetclinic.models.Appointment;
+import com.example.springpetclinic.models.Pet;
 import com.example.springpetclinic.repositories.AppointmentRepository;
 import com.example.springpetclinic.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
